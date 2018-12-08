@@ -34,11 +34,9 @@ public class CanvasPanel extends JPanel {
 
             for (int j = 0; j < balls.size(); j++) {
                     if(physics.checkCollisionBall(balls.get(i), balls)){
-                        balls.get(i).setColor(Color.red);
-                        balls.get(i).setSpeedX(-balls.get(i).getSpeedX());
-                        balls.get(i).setSpeedY(-balls.get(i).getSpeedY());
+
                     }else{
-                        balls.get(i).setColor(Color.green);
+
                     }
 
             }

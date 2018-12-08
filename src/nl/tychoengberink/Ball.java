@@ -47,21 +47,14 @@ public class Ball {
 
         x = x + speedX;
         y = y + speedY;
-//        System.out.println("this.width " + this.width);
-//        System.out.println("this.height " +this.height);
-//        System.out.println("this.radius " +this.radius);
-//        System.out.println("this.x " +this.x);
-//        System.out.println("this.y " +this.y);
-//        System.out.println("this.by " +this.by);
-//        System.out.println("this.bx " +this.bx);
 
         if (this.x - this.radius < 0) {
             this.speedX = -this.speedX;
-           // setColor(Color.red);
+
             this.x = this.radius;
         } else if (this.x + this.radius > this.bx) {
             this.speedX = -this.speedX;
-           // setColor(Color.red);
+
             this.x = this.bx - this.radius;
         }
 
@@ -93,6 +86,10 @@ public class Ball {
     public void setColor(Color color){
         this.color = color;
     }
+
+    public void setX(double x){this.x = x;}
+
+    public void setY(double y){this.y = y;}
 
     public double getX(){
         return this.x;

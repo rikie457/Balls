@@ -1,5 +1,6 @@
 package nl.tychoengberink;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Physics {
@@ -19,9 +20,17 @@ public class Physics {
 
             if (distSqr <= sqrRadius)
             {
+                ball.setX(ball.getSpeedX() + ball.getX());
+                ball.setY(ball.getSpeedY() + ball.getY());
+                ball.setSpeedX(ball.getSpeedY() - ball.getSpeedX());
+                ball.setSpeedY(ball.getSpeedY() - ball.getSpeedY());
+                ball.setColor(Color.red);
                 return true;
             }
+            ball.setColor(Color.green);
         }
+
+
         return false;
         }
 
