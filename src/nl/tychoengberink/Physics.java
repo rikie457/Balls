@@ -4,9 +4,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Physics {
-    public boolean checkCollisionBall(Ball ball, ArrayList<Ball> balls){
-        for(int i = 0; i < balls.size(); i++){
-            if(ball == balls.get(i)){
+    public boolean checkCollisionBall(Ball ball, ArrayList<Ball> balls) {
+        for (int i = 0; i < balls.size(); i++) {
+            if (ball == balls.get(i)) {
                 continue;
             }
             double xd = ball.getX() - balls.get(i).getX();
@@ -18,12 +18,7 @@ public class Physics {
             double distSqr = (xd * xd) + (yd * yd);
 
 
-            if (distSqr <= sqrRadius)
-            {
-                ball.setX(ball.getSpeedX() + ball.getX());
-                ball.setY(ball.getSpeedY() + ball.getY());
-                ball.setSpeedX(ball.getSpeedY() - ball.getSpeedX());
-                ball.setSpeedY(ball.getSpeedY() - ball.getSpeedY());
+            if (distSqr <= sqrRadius) {
                 ball.setColor(Color.red);
                 return true;
             }
@@ -32,6 +27,6 @@ public class Physics {
 
 
         return false;
-        }
+    }
 
 }

@@ -33,11 +33,7 @@ public class CanvasPanel extends JPanel {
             balls.get(i).draw(g);
 
             for (int j = 0; j < balls.size(); j++) {
-                    if(physics.checkCollisionBall(balls.get(i), balls)){
-
-                    }else{
-
-                    }
+                physics.checkCollisionBall(balls.get(i), balls);
 
             }
 

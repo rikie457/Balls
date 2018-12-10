@@ -3,6 +3,7 @@ package nl.tychoengberink;
 import java.awt.*;
 
 public class Ball {
+    private double mass = 100;
     private double x; // X axle position
     private double y; //Y axle position
     private double width; //width of Ball
@@ -14,7 +15,7 @@ public class Ball {
     private double by; //boundry Y axle
     private Color color; //Color of Ball
 
-    public Ball(double x, double y, double width, double height, Color color, double bx, double by , double speedY, double speedX) {
+    public Ball(double x, double y, double width, double height, Color color, double bx, double by, double speedY, double speedX) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -28,7 +29,7 @@ public class Ball {
 
     }
 
-    public Ball(double x, double y, double width, double height, Color color, double bx, double by ) {
+    public Ball(double x, double y, double width, double height, Color color, double bx, double by) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -64,13 +65,12 @@ public class Ball {
             this.y = this.radius;
         } else if (this.y + this.radius > this.by) {
             this.speedY = -this.speedY;
-           // setColor(Color.red);
+            // setColor(Color.red);
             this.y = this.by - this.radius;
         }
 
         g.setColor(this.color);
-        g.fillOval((int)this.x, (int)this.y, (int)this.width, (int)this.height);
-
+        g.fillOval((int) this.x, (int) this.y, (int) this.width, (int) this.height);
 
 
     }
@@ -83,27 +83,39 @@ public class Ball {
         this.speedY = speedY;
     }
 
-    public void setColor(Color color){
+    public void setColor(Color color) {
         this.color = color;
     }
 
-    public void setX(double x){this.x = x;}
+    public void setX(double x) {
+        this.x = x;
+    }
 
-    public void setY(double y){this.y = y;}
+    public void setY(double y) {
+        this.y = y;
+    }
 
-    public double getX(){
+    public double getMass() {
+        return this.mass;
+    }
+
+    public double getX() {
         return this.x;
     }
 
-    public double getY(){
+    public double getY() {
         return this.y;
     }
 
-    public double getSpeedX(){ return this.speedX;}
+    public double getSpeedX() {
+        return this.speedX;
+    }
 
-    public double getSpeedY(){return this.speedY;}
+    public double getSpeedY() {
+        return this.speedY;
+    }
 
-    public double getRadius(){
+    public double getRadius() {
         return this.radius;
     }
 

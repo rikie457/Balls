@@ -28,7 +28,7 @@ public class Main {
         });
 
         panel.initialize();
-        Timer timer = new Timer(1000/60, e -> panel.repaint());
+        Timer timer = new Timer(1000 / 60, e -> panel.repaint());
         timer.start();
     }
 }
