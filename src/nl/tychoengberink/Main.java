@@ -1,8 +1,7 @@
 package nl.tychoengberink;
 
 import javax.swing.*;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.*;
 
 
 public class Main {
@@ -19,16 +18,12 @@ public class Main {
         frame.setSize(1920, 1080);
         CanvasPanel panel = new CanvasPanel(WIDTH, HEIGHT);
         frame.add(panel);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
         frame.setVisible(true);
-        frame.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                super.componentResized(e);
-            }
-        });
-
+        frame.setBackground(Color.black);
         panel.initialize();
-        Timer timer = new Timer(1000 / 60, e -> panel.repaint());
+        Timer timer = new Timer(1000 / 240, e -> panel.repaint());
         timer.start();
     }
 }

@@ -3,19 +3,19 @@ package nl.tychoengberink;
 import java.awt.*;
 
 public class Ball {
-    private double mass = 100;
+    private double mass;
     private double x; // X axle position
     private double y; //Y axle position
     private double width; //width of Ball
     private double height; //height of Ball
     private double radius; //Radius of Ball (width/2)
-    private double speedX; //Speed Y
-    private double speedY; //Speed X
+    public double speedX; //Speed Y
+    public double speedY; //Speed X
     private double bx; //boundry X axle
     private double by; //boundry Y axle
     private Color color; //Color of Ball
 
-    public Ball(double x, double y, double width, double height, Color color, double bx, double by, double speedY, double speedX) {
+    public Ball(double x, double y, double width, double height, Color color, double bx, double by, double speedY, double speedX, double mass) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -26,10 +26,10 @@ public class Ball {
         this.speedX = speedX;
         this.bx = bx;
         this.by = by;
-
+        this.mass = mass;
     }
 
-    public Ball(double x, double y, double width, double height, Color color, double bx, double by) {
+    public Ball(double x, double y, double width, double height, Color color, double bx, double by, double mass) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -40,7 +40,7 @@ public class Ball {
         this.speedX = (Math.random() * 10) + 1;
         this.bx = bx;
         this.by = by;
-
+        this.mass = mass;
 
     }
 

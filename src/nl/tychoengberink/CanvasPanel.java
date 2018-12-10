@@ -5,9 +5,9 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class CanvasPanel extends JPanel {
-    private double x, y, wh, speedX, speedY, maxwidth, maxheight;
+    private double maxwidth;
+    private double maxheight;
     public ArrayList<Ball> balls = new ArrayList<Ball>();
-    public Physics physics = new Physics();
 
     public CanvasPanel(double maxwidth, double maxheight) {
         this.maxwidth = maxwidth;
@@ -15,13 +15,13 @@ public class CanvasPanel extends JPanel {
     }
 
     public void initialize() {
-        this.x = getWidth() / 2;
-        this.y = getHeight() / 2;
-
-        for (int i = 0; i < 100; i++) {
-            wh = (Math.random() * 100) + 1;
-            //new Color((int) (Math.random() * 0x1000000))
-            balls.add(new Ball(this.x, this.y, wh, wh, Color.green, this.maxwidth, this.maxheight));
+        double wh, mass;
+        super.setBackground(Color.black);
+        for (int i = 0; i < 100000; i++) {
+            wh = (Math.random() * 25) + 1;
+            mass = ((wh / 2) *  (wh / 2)) * Math.PI;
+            //   new Color((int) (Math.random() * 0x1000000));
+            balls.add(new Ball((Math.random() * 1920), (Math.random() * 1080), wh, wh, new Color((int) (Math.random() * 0x1000000)), this.maxwidth, this.maxheight, (Math.random() * 2), (Math.random() * 2), mass));
         }
 
     }
@@ -33,8 +33,7 @@ public class CanvasPanel extends JPanel {
             balls.get(i).draw(g);
 
             for (int j = 0; j < balls.size(); j++) {
-                physics.checkCollisionBall(balls.get(i), balls);
-
+               // Physics.checkCollisionBall(balls.get(i), balls);
             }
 
         }
