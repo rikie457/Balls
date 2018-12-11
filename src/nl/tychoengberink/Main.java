@@ -14,8 +14,10 @@ public class Main {
 
     private void run() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
         this.width = screenSize.getWidth();
         this.height = screenSize.getHeight();
+
 
         JFrame frame = new JFrame();
         CanvasPanel panel = new CanvasPanel(this.width, this.height, 25);
