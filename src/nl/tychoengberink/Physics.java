@@ -1,39 +1,35 @@
 package nl.tychoengberink;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Physics {
-    public void checkCollisionBall(Ball ball, ArrayList<Ball> balls) {
-        for (int i = 0; i < balls.size(); i++) {
-            if (ball == balls.get(i)) {
+    public static void checkCollision(Shape shape, ArrayList<Shape> shapes) {
+        for (Shape shape1 : shapes) {
+            if (shape == shape1) {
                 continue;
             }
-            double xd = ball.getX() - balls.get(i).getX();
-            double yd = ball.getY() - balls.get(i).getY();
+            Shape A = shape;
+            Shape B = shape1;
+            double xd = shape.getX() - shape1.getX();
+            double yd = shape.getY() - shape1.getY();
             double distSqr = (xd * xd) + (yd * yd);
-            if (distSqr <= (ball.getRadius() + balls.get(i).getRadius()) * (ball.getRadius() + balls.get(i).getRadius())) {
-                Info.addToBallCollisionCounter();
-                double xVelocity = balls.get(i).getSpeedX() - ball.getSpeedX();
-                double yVelocity = balls.get(i).getSpeedY() - ball.getSpeedY();
+            if (distSqr <= (A.getWidth() + B.getWidth()) * (A.getWidth() + B.getWidth())) {
+                double xVelocity = B.getSpeedX() - A.getSpeedX();
+                double yVelocity = B.getSpeedY() - A.getSpeedY();
                 double dotProduct = xd * xVelocity + yd * yVelocity;
-
                 if (dotProduct > 0) {
                     double collisionScale = dotProduct / distSqr;
                     double xCollision = xd * collisionScale;
                     double yCollision = yd * collisionScale;
-                    double combinedMass = ball.getMass() + balls.get(i).getMass();
-                    double collisionWeightA = 2 * balls.get(i).getMass() / combinedMass;
-                    double collisionWeightB = 2 * ball.getMass() / combinedMass;
-                    ball.speedX += collisionWeightA * xCollision;
-                    ball.speedY += collisionWeightA * yCollision;
-                    balls.get(i).speedX -= collisionWeightB * xCollision;
-                    balls.get(i).speedY -= collisionWeightB * yCollision;
-
+                    double combinedMass = A.getMass() + B.getMass();
+                    double collisionWeightA = 2 * B.getMass() / combinedMass;
+                    double collisionWeightB = 2 * A.getMass() / combinedMass;
+                    A.speedX += collisionWeightA * xCollision;
+                    A.speedY += collisionWeightA * yCollision;
+                    B.speedX -= collisionWeightB * xCollision;
+                    B.speedY -= collisionWeightB * yCollision;
                 }
             }
         }
-
     }
-
 }
