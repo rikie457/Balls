@@ -6,17 +6,18 @@ import java.awt.*;
 
 public class Main {
 
-    public static final double WIDTH = 1920, HEIGHT = 1080;
-
     public static void main(String[] args) {
         Main main = new Main();
         main.run();
     }
 
     private void run() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double width = screenSize.getWidth();
+        double height = screenSize.getHeight();
         JFrame frame = new JFrame();
-        frame.setSize(1920, 1080);
-        CanvasPanel panel = new CanvasPanel(WIDTH, HEIGHT);
+        frame.setSize((int)width, (int)height);
+        CanvasPanel panel = new CanvasPanel((int)width, (int)height);
         frame.add(panel);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
