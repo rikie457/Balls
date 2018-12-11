@@ -47,36 +47,29 @@ public class Ball {
     public void draw(Graphics g) {
 
         x = x + speedX;
-        Info.addToCalculationCounter();
         y = y + speedY;
-        Info.addToCalculationCounter();
 
         if (this.x - this.radius < 0) {
             this.speedX = -this.speedX;
-            Info.addToCalculationCounter();
-
+            Info.addToWallCollisionCounter();
             this.x = this.radius;
-            Info.addToCalculationCounter();
         } else if (this.x + this.radius > this.bx) {
+            Info.addToWallCollisionCounter();
             this.speedX = -this.speedX;
-            Info.addToCalculationCounter();
 
             this.x = this.bx - this.radius;
-            Info.addToCalculationCounter();
         }
 
         if (this.y - this.radius < 0) {
+            Info.addToWallCollisionCounter();
             this.speedY = -this.speedY;
-            Info.addToCalculationCounter();
             //setColor(Color.red);
             this.y = this.radius;
-            Info.addToCalculationCounter();
         } else if (this.y + this.radius > this.by) {
+            Info.addToWallCollisionCounter();
             this.speedY = -this.speedY;
-            Info.addToCalculationCounter();
             // setColor(Color.red);
             this.y = this.by - this.radius;
-            Info.addToCalculationCounter();
         }
 
         g.setColor(this.color);

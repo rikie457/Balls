@@ -15,6 +15,7 @@ public class Main {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
+
         JFrame frame = new JFrame();
         frame.setSize((int)width, (int)height);
         CanvasPanel panel = new CanvasPanel((int)width, (int)height);
@@ -24,7 +25,7 @@ public class Main {
         frame.setVisible(true);
         frame.setBackground(Color.black);
         panel.initialize();
-        Timer timer = new Timer(1000 / 240, e -> panel.repaint());
+        Timer timer = new Timer(1000 / 120, e -> panel.repaint());
         timer.start();
     }
 }
