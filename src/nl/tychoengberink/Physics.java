@@ -24,10 +24,19 @@ public class Physics {
                     double combinedMass = A.getMass() + B.getMass();
                     double collisionWeightA = 2 * B.getMass() / combinedMass;
                     double collisionWeightB = 2 * A.getMass() / combinedMass;
-                    A.speedX += collisionWeightA * xCollision;
-                    A.speedY += collisionWeightA * yCollision;
-                    B.speedX -= collisionWeightB * xCollision;
-                    B.speedY -= collisionWeightB * yCollision;
+                    if (A.getMass() > B.getMass()) {
+                        A.speedX += collisionWeightA * xCollision;
+                        A.speedY += collisionWeightA * yCollision;
+                        A.setWidth((A.getWidth() + B.getWidth()));
+                        A.setHeight(A.getWidth());
+                        shapes.remove(B);
+                    } else {
+                        B.speedX -= collisionWeightB * xCollision;
+                        B.speedY -= collisionWeightB * yCollision;
+                        B.setWidth((A.getWidth() + B.getWidth()));
+                        B.setHeight(B.getWidth());
+                        shapes.remove(A);
+                    }
                 }
             }
         }
