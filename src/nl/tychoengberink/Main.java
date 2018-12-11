@@ -18,20 +18,21 @@ public class Main {
         this.height = screenSize.getHeight();
 
         JFrame frame = new JFrame();
-        CanvasPanel panel = new CanvasPanel((int) width, (int) height);
+        CanvasPanel panel = new CanvasPanel(this.width, this.height, 25);
         createObjects(frame, panel);
 
-        Timer timer = new Timer(1000 / 240, e -> panel.repaint());
+        Timer timer = new Timer(1000 / 120, e -> panel.repaint());
         timer.start();
     }
 
     private void createObjects(JFrame frame, CanvasPanel panel) {
-        frame.setSize((int) width, (int) height);
+        frame.setSize((int) this.width, (int) this.height);
         frame.add(panel);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
         frame.setVisible(true);
         frame.setBackground(Color.black);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel.initialize();
     }
 }
