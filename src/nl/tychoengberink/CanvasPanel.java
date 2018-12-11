@@ -7,12 +7,20 @@ import java.util.ArrayList;
 public class CanvasPanel extends JPanel {
     private double maxwidth;
     private double maxheight;
+    private int amountOfBalls;
     public ArrayList<Ball> balls = new ArrayList<Ball>();
     private Info info = new Info();
 
     public CanvasPanel(double maxwidth, double maxheight) {
         this.maxwidth = maxwidth;
         this.maxheight = maxheight;
+        this.amountOfBalls = 50;
+    }
+
+    public CanvasPanel(double maxwidth, double maxheight, int amountOfBalls) {
+        this.maxwidth = maxwidth;
+        this.maxheight = maxheight;
+        this.amountOfBalls = amountOfBalls;
     }
 
     public void initialize() {
