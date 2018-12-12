@@ -4,20 +4,21 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Ball {
+    public double speedX; //Speed Y
+    public double speedY; //Speed X
     private double mass;
     private double x; // X axle position
     private double y; //Y axle position
     private double width; //width of Ball
     private double height; //height of Ball
     private double radius; //Radius of Ball (width/2)
-    public double speedX; //Speed Y
-    public double speedY; //Speed X
     private double bx; //boundry X axle
     private double by; //boundry Y axle
+    private String type;
     private Color color; //Color of Ball
     private ArrayList<Ball> balls;
 
-    public Ball(double x, double y, double width, double height, Color color, double bx, double by, double speedY, double speedX, double mass, ArrayList<Ball> balls) {
+    public Ball(double x, double y, double width, double height, Color color, double bx, double by, double speedY, double speedX, double mass, ArrayList<Ball> balls, String type) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -30,9 +31,10 @@ public class Ball {
         this.by = by;
         this.mass = mass;
         this.balls = balls;
+        this.type = type;
     }
 
-    public Ball(double x, double y, double width, double height, Color color, double bx, double by, double mass, ArrayList<Ball> balls) {
+    public Ball(double x, double y, double width, double height, Color color, double bx, double by, double mass, ArrayList<Ball> balls, String type) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -45,23 +47,23 @@ public class Ball {
         this.by = by;
         this.mass = mass;
         this.balls = balls;
-
+        this.type = type;
     }
 
-    public void checkCollisionBall( ArrayList<Ball> balls) {
+    private void checkCollisionBall(ArrayList<Ball> balls) {
         for (int i = 0; i < balls.size(); i++) {
+            double distSqr = Utility.getDistance(this.getX(), this.getY(), balls.get(i).getX(), balls.get(i).getY());
+            double xd = Utility.getXDistance(this.getX(), balls.get(i).getX());
+            double yd = Utility.getYDistance(this.getY(), balls.get(i).getY());
             if (this == balls.get(i)) {
                 continue;
             }
-            double xd = this.getX() - balls.get(i).getX();
-            double yd = this.getY() - balls.get(i).getY();
-            double distSqr = (xd * xd) + (yd * yd);
+
             if (distSqr <= (this.getRadius() + balls.get(i).getRadius()) * (this.getRadius() + balls.get(i).getRadius())) {
                 Info.addToBallCollisionCounter();
                 double xVelocity = balls.get(i).getSpeedX() - this.getSpeedX();
                 double yVelocity = balls.get(i).getSpeedY() - this.getSpeedY();
                 double dotProduct = xd * xVelocity + yd * yVelocity;
-
                 if (dotProduct > 0) {
                     double collisionScale = dotProduct / distSqr;
                     double xCollision = xd * collisionScale;
@@ -73,65 +75,54 @@ public class Ball {
                     this.speedY += collisionWeightA * yCollision;
                     balls.get(i).speedX -= collisionWeightB * xCollision;
                     balls.get(i).speedY -= collisionWeightB * yCollision;
-
                 }
             }
         }
 
     }
 
-    public void draw(Graphics g) {
-
+    private void checkCollisionWall() {
         this.x = x + speedX;
         this.y = y + speedY;
 
         if (this.x - this.radius < 0) {
-            this.speedX = -this.speedX;
             Info.addToWallCollisionCounter();
+            this.speedX = -this.speedX;
             this.x = this.radius;
         } else if (this.x + this.radius > this.bx) {
             Info.addToWallCollisionCounter();
             this.speedX = -this.speedX;
-
             this.x = this.bx - this.radius;
         }
 
         if (this.y - this.radius < 0) {
             Info.addToWallCollisionCounter();
             this.speedY = -this.speedY;
-            //setColor(Color.red);
             this.y = this.radius;
         } else if (this.y + this.radius > this.by) {
             Info.addToWallCollisionCounter();
             this.speedY = -this.speedY;
-            // setColor(Color.red);
             this.y = this.by - this.radius;
         }
+    }
+
+    public void draw(Graphics g) {
+
+        checkCollisionWall();
         checkCollisionBall(balls);
         g.setColor(this.color);
-        g.fillOval((int) this.x, (int) this.y, (int) this.width, (int) this.height);
+
+        if (this.type.equals("fill")) {
+            g.fillOval((int) this.x, (int) this.y, (int) this.width, (int) this.height);
+        } else if (this.type.equals("line")) {
+            g.drawOval((int) this.x, (int) this.y, (int) this.width, (int) this.height);
+        }
 
 
-    }
-
-    public void setSpeedX(double speedX) {
-        this.speedX = speedX;
-    }
-
-    public void setSpeedY(double speedY) {
-        this.speedY = speedY;
     }
 
     public void setColor(Color color) {
         this.color = color;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     public double getMass() {
@@ -142,16 +133,32 @@ public class Ball {
         return this.x;
     }
 
+    public void setX(double x) {
+        this.x = x;
+    }
+
     public double getY() {
         return this.y;
+    }
+
+    public void setY(double y) {
+        this.y = y;
     }
 
     public double getSpeedX() {
         return this.speedX;
     }
 
+    public void setSpeedX(double speedX) {
+        this.speedX = speedX;
+    }
+
     public double getSpeedY() {
         return this.speedY;
+    }
+
+    public void setSpeedY(double speedY) {
+        this.speedY = speedY;
     }
 
     public double getRadius() {
